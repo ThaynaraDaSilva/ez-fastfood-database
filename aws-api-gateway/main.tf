@@ -20,7 +20,7 @@ variable "api_name" {
 # Define the Ngrok URL for the local backend
 variable "ngrok_url" {
   description = "Ngrok URL exposing the local backend API"
-  default     = "https://9175-177-190-77-68.ngrok-free.app" # Replace with your actual Ngrok URL
+  default     = "https://878a-177-190-77-61.ngrok-free.app" # Replace with your actual Ngrok URL
 }
 
 # Create the API Gateway
@@ -64,6 +64,7 @@ resource "aws_apigatewayv2_route" "proxy_route" {
   route_key = "ANY /{proxy+}"
   target    = "integrations/${aws_apigatewayv2_integration.backend_integration.id}"
 }
+
 
 # Output the API Gateway endpoint
 output "api_endpoint" {
