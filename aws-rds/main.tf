@@ -19,6 +19,7 @@ resource "aws_db_subnet_group" "rds_subnet_group" {
 
 # RDS PostgreSQL Database Instance
 resource "aws_db_instance" "postgresql" {
+  identifier            = "rds-postgres-dev-nvirginia-ezfastfood"
   allocated_storage      = 20                        # Minimum storage to fit free tier
   storage_type           = "gp2"                     # General-purpose SSD, suitable for free tier
   engine                 = "postgres"                # Database engine
