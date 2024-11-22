@@ -34,11 +34,12 @@ build/
 ### VS Code ###
 .vscode/
 
-# Ignore Terraform directories and state files
+# Ignore Terraform files
 .terraform/
 *.tfstate
 *.tfstate.*
-.crash
-*.tfvars
 *.backup
+*.log
+*.tfvars
+crash.log
 
