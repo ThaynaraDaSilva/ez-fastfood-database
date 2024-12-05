@@ -26,11 +26,16 @@ jobs:
           echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
           echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
 
-      - name: Terraform Init
-        run: terraform init
+      - name: Deploy VPC
+        run: |
+          cd aws-vpc
+          terraform init
+          terraform plan
+          terraform apply -auto-approve
 
-      - name: Terraform Plan
-        run: terraform plan
-
-      - name: Terraform Apply
-        run: terraform apply -auto-approve
+      - name: Deploy RDS
+        run: |
+          cd aws-rds
+          terraform init
+          terraform plan
+          terraform apply -auto-approve
