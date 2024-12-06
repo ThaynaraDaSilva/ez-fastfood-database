@@ -24,11 +24,12 @@ resource "aws_db_subnet_group" "rds_subnet_group" {
   }
 }
 
-# Define locals for subnet group name
+# Use `try` for conditional logic
 locals {
-  rds_subnet_group_name = length(data.aws_db_subnet_group.existing_rds_subnet_group.id) > 0 ?
-                          data.aws_db_subnet_group.existing_rds_subnet_group.name :
-                          aws_db_subnet_group.rds_subnet_group[0].name
+  rds_subnet_group_name = try(
+    data.aws_db_subnet_group.existing_rds_subnet_group.name,
+    aws_db_subnet_group.rds_subnet_group[0].name
+  )
 }
 
 # RDS PostgreSQL Database Instance
