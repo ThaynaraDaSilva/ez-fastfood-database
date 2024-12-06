@@ -37,6 +37,7 @@ jobs:
       - name: Check Existing RDS Instance
         run: |
           cd aws-rds
+          terraform init
           EXISTING=$(aws rds describe-db-instances --db-instance-identifier rds-postgres-dev-nvirginia-ezfastfood || echo "NOT_FOUND")
           if [[ "$EXISTING" != "NOT_FOUND" ]]; then
             echo "RDS instance already exists. Importing into Terraform state."
