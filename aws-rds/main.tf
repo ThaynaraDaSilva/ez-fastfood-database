@@ -38,7 +38,7 @@ resource "aws_db_instance" "postgresql" {
   publicly_accessible   = true                      # Set to false to avoid public access costs
   vpc_security_group_ids = [module.aws-vpc.rds_security_group_id]
   skip_final_snapshot   = true                      # Skips final snapshot to avoid storage costs on delete
-  db_subnet_group_name  = coalesce(data.aws_db_subnet_group.existing_rds_subnet_group.name, aws_db_subnet_group.rds_subnet_group[0].name)
+  db_subnet_group_name  = length(data.aws_db_subnet_group.existing_rds_subnet_group.id) > 0 ? data.aws_db_subnet_group.existing_rds_subnet_group.name : aws_db_subnet_group.rds_subnet_group[0].name
   
   tags = {
     Name        = "rds-postgres-dev-nvirginia-ezfastfood-instance"
