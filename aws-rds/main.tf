@@ -24,6 +24,13 @@ resource "aws_db_subnet_group" "rds_subnet_group" {
   }
 }
 
+# Define locals for subnet group name
+locals {
+  rds_subnet_group_name = length(data.aws_db_subnet_group.existing_rds_subnet_group.id) > 0 ?
+                          data.aws_db_subnet_group.existing_rds_subnet_group.name :
+                          aws_db_subnet_group.rds_subnet_group[0].name
+}
+
 # RDS PostgreSQL Database Instance
 resource "aws_db_instance" "postgresql" {
   identifier            = "rds-postgres-dev-nvirginia-ezfastfood"
@@ -40,9 +47,7 @@ resource "aws_db_instance" "postgresql" {
   vpc_security_group_ids = [module.aws-vpc.rds_security_group_id]
 
   skip_final_snapshot   = true                      # Avoid snapshot storage costs on delete
-  db_subnet_group_name  = data.aws_db_subnet_group.existing_rds_subnet_group.id != "" ? 
-                          data.aws_db_subnet_group.existing_rds_subnet_group.name : 
-                          aws_db_subnet_group.rds_subnet_group[0].name
+  db_subnet_group_name  = local.rds_subnet_group_name
 
   tags = {
     Name        = "rds-postgres-dev-nvirginia-ezfastfood-instance"
