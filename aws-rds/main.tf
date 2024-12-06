@@ -40,13 +40,9 @@ resource "aws_db_instance" "postgresql" {
   vpc_security_group_ids = [module.aws-vpc.rds_security_group_id]
 
   skip_final_snapshot   = true                      # Avoid snapshot storage costs on delete
-  db_subnet_group_name  = length(data.aws_db_subnet_group.existing_rds_subnet_group.id) > 0 ? data.aws_db_subnet_group.existing_rds_subnet_group.name : aws_db_subnet_group.rds_subnet_group[0].name
-
-  # Ensure the RDS instance is in the same VPC as the security group
-  subnet_ids = [
-    module.aws-vpc.public_subnet_id_1,
-    module.aws-vpc.public_subnet_id_2
-  ]
+  db_subnet_group_name  = length(data.aws_db_subnet_group.existing_rds_subnet_group.id) > 0 ? 
+                          data.aws_db_subnet_group.existing_rds_subnet_group.name : 
+                          aws_db_subnet_group.rds_subnet_group[0].name
 
   tags = {
     Name        = "rds-postgres-dev-nvirginia-ezfastfood-instance"
