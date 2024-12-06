@@ -44,6 +44,17 @@ jobs:
             terraform import aws_db_instance.postgresql rds-postgres-dev-nvirginia-ezfastfood
           fi
 
+      - name: Check VPC IDs
+        run: |
+          VPC_ID_VPC=$(terraform output -state=../aws-vpc/terraform.tfstate vpc_id)
+          VPC_ID_RDS=$(terraform state show aws_db_instance.postgresql | grep vpc_security_group_ids | cut -d'=' -f2 | tr -d ' ')
+          if [[ "$VPC_ID_VPC" != "$VPC_ID_RDS" ]]; then
+            echo "VPC IDs do not match!"
+            exit 1
+          else
+            echo "VPC IDs match."
+          fi
+
       - name: Deploy RDS
         run: |
           cd aws-rds
