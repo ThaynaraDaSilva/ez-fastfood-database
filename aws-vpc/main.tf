@@ -10,7 +10,7 @@ resource "aws_vpc" "ez_fastfood_vpc" {
   enable_dns_hostnames = true # adicionado devido ao BD estar exposto 
 
   tags = {
-    Name       = "vpc-dev-nvirginia-ezfastfood-vpc"
+    Name       = "vpc-dev-nvirginia-ezfastfood"
     Environment = var.environment
     Project    = var.project
   }
