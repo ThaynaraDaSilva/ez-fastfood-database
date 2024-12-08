@@ -85,7 +85,7 @@ resource "aws_route_table_association" "public_route_table_assoc_2" {
 
 # Security Group to Allow External Access to PostgreSQL
 resource "aws_security_group" "rds_security_group" {
-  name        = "rds-dev-nvirginia-ezfastfood-sg"
+  name        = "rds-dev-nvirginia-ezfastfood"
   description = "Allow inbound PostgreSQL access for ez-fast-food project"
   vpc_id      = aws_vpc.ez_fastfood_vpc.id
 
@@ -104,7 +104,7 @@ resource "aws_security_group" "rds_security_group" {
   }
 
   tags = {
-    Name       = "rds-dev-nvirginia-ezfastfood-sg"
+    Name       = "rds-dev-nvirginia-ezfastfood"
     Environment = "dev"
     Project    = "ez-fast-food"
   }

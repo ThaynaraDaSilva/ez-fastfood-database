@@ -1,10 +1,7 @@
-name: Deploy to AWS
+name: Deploy Infrastructure
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
     branches:
       - main
 
@@ -13,19 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v2
-        with:
-          terraform_version: 1.5.0
-
-      - name: Set AWS Credentials
-        run: |
-          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
-          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
-          echo "AWS_DEFAULT_REGION=us-east-1" >> $GITHUB_ENV
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
       - name: Deploy VPC
         run: |
@@ -45,24 +31,15 @@ jobs:
           fi
 
       - name: Check VPC IDs
+        id: vpc_id_check
         run: |
-          VPC_ID_VPC=$(terraform output -state=../aws-vpc/terraform.tfstate vpc_id)
-          VPC_ID_RDS=$(terraform state show aws_db_instance.postgresql | grep vpc_security_group_ids | cut -d'=' -f2 | tr -d ' ')
-          if [[ "$VPC_ID_VPC" != "$VPC_ID_RDS" ]]; then
-            echo "VPC IDs do not match!"
-            exit 1
-          else
-            echo "VPC IDs match."
-          fi
+          cd aws-vpc
+          VPC_ID_VPC=$(terraform output -raw vpc_id)
+          echo "::set-output name=vpc_id::$VPC_ID_VPC"
 
       - name: Deploy RDS
         run: |
           cd aws-rds
           terraform init
-          terraform plan
-          terraform apply -auto-approve
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: us-east-1
-
+          terraform plan -var "vpc_id=${{ steps.vpc_id_check.outputs.vpc_id }}"
+          terraform apply -auto-approve -var "vpc_id=${{ steps.vpc_id_check.outputs.vpc_id }}"
