@@ -23,6 +23,16 @@ jobs:
           echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
           echo "AWS_DEFAULT_REGION=us-east-1" >> $GITHUB_ENV
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0
+      - name: Set AWS Credentials
+        run: |
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
+          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
+          echo "AWS_DEFAULT_REGION=us-east-1" >> $GITHUB_ENV
+
       - name: Deploy VPC
         run: |
           cd aws-vpc
