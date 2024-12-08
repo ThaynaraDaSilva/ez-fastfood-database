@@ -1,3 +1,4 @@
+# aws-rds/main.tf
 module "aws-vpc" {
   source = "../aws-vpc"
   # Include other required variables for the VPC module here
@@ -8,21 +9,13 @@ data "aws_db_subnet_group" "existing_rds_subnet_group" {
   name = "rds-postgres-dev-nvirginia-ezfastfood-subnet-group"
 }
 
-# Retrieve VPC ID from the Terraform state of the VPC module
-data "terraform_remote_state" "vpc" {
-  backend = "local"
-  config = {
-    path = "../aws-vpc/terraform.tfstate"
-  }
-}
-
 # RDS Subnet Group
 resource "aws_db_subnet_group" "rds_subnet_group" {
   count      = length(data.aws_db_subnet_group.existing_rds_subnet_group.id) > 0 ? 0 : 1
   name       = "rds-postgres-dev-nvirginia-ezfastfood-subnet-group"
   subnet_ids = [
-    module.aws-vpc.public_subnet_id_1,
-    module.aws-vpc.public_subnet_id_2
+    var.public_subnet_id_1,
+    var.public_subnet_id_2
   ]
 
   tags = {
@@ -53,7 +46,7 @@ resource "aws_db_instance" "postgresql" {
   parameter_group_name  = "default.postgres13"
   publicly_accessible   = true
 
-  vpc_security_group_ids = [data.terraform_remote_state.vpc.outputs.vpc_id]
+  vpc_security_group_ids = [var.rds_security_group_id]
 
   skip_final_snapshot   = true
   db_subnet_group_name  = local.rds_subnet_group_name
