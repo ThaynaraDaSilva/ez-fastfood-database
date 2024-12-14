@@ -1,0 +1,71 @@
+name: Deploy Infrastructure
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0
+      - name: Set AWS Credentials
+        run: |
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
+          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
+          echo "AWS_DEFAULT_REGION=us-east-1" >> $GITHUB_ENV
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.0
+      - name: Set AWS Credentials
+        run: |
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> $GITHUB_ENV
+          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> $GITHUB_ENV
+          echo "AWS_DEFAULT_REGION=us-east-1" >> $GITHUB_ENV
+
+      - name: Deploy VPC
+        run: |
+          cd aws-vpc
+          terraform init
+          terraform plan
+          terraform apply -auto-approve
+
+      - name: Check Existing RDS Instance
+        run: |
+          cd aws-rds
+          terraform init
+          EXISTING=$(aws rds describe-db-instances --db-instance-identifier rds-postgres-dev-nvirginia-ezfastfood || echo "NOT_FOUND")
+          if [[ "$EXISTING" != "NOT_FOUND" ]]; then
+            echo "RDS instance already exists. Importing into Terraform state."
+            terraform import aws_db_instance.postgresql rds-postgres-dev-nvirginia-ezfastfood
+          fi
+
+      - name: Check VPC IDs
+        id: vpc_id_check
+        run: |
+          cd aws-vpc
+          VPC_ID_VPC=$(terraform output -raw vpc_id)
+          PUBLIC_SUBNET_ID_1=$(terraform output -raw public_subnet_id_1)
+          PUBLIC_SUBNET_ID_2=$(terraform output -raw public_subnet_id_2)
+          RDS_SECURITY_GROUP_ID=$(terraform output -raw rds_security_group_id)
+          echo "::set-output name=vpc_id::$VPC_ID_VPC"
+          echo "::set-output name=public_subnet_id_1::$PUBLIC_SUBNET_ID_1"
+          echo "::set-output name=public_subnet_id_2::$PUBLIC_SUBNET_ID_2"
+          echo "::set-output name=rds_security_group_id::$RDS_SECURITY_GROUP_ID"
+
+      - name: Deploy RDS
+        run: |
+          cd aws-rds
+          terraform init
+          terraform plan -var "vpc_id=${{ steps.vpc_id_check.outputs.vpc_id }}" -var "public_subnet_id_1=${{ steps.vpc_id_check.outputs.public_subnet_id_1 }}" -var "public_subnet_id_2=${{ steps.vpc_id_check.outputs.public_subnet_id_2 }}" -var "rds_security_group_id=${{ steps.vpc_id_check.outputs.rds_security_group_id }}"
+          terraform apply -auto-approve -var "vpc_id=${{ steps.vpc_id_check.outputs.vpc_id }}" -var "public_subnet_id_1=${{ steps.vpc_id_check.outputs.public_subnet_id_1 }}" -var "public_subnet_id_2=${{ steps.vpc_id_check.outputs.public_subnet_id_2 }}" -var "rds_security_group_id=${{ steps.vpc_id_check.outputs.rds_security_group_id }}"
