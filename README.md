@@ -81,7 +81,7 @@ O repositório está organizado com os seguintes diretórios principais:
 ---
 
 ## Modelagem de Dados
-O banco de dados foi modelado com base nos requisitos do negócio, priorizando o uso de relacionamentos fortes entre tabelas. O diagrama abaixo representa o modelo de dados, incluindo entidades como **Pedidos**, **Produtos** e **Clientes**.
+O banco de dados foi modelado com base nos requisitos do negócio, priorizando o uso de relacionamentos fortes entre tabelas. O diagrama abaixo representa o modelo de dados, incluindo entidades como **Pedidos**, **Pagamentos** e **Clientes**.
 
 ![Diagrama ER](./diagrams/database-model.png)
 
