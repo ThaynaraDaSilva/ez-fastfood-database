@@ -3,6 +3,18 @@ variable "vpc_name" {
   type        = string
 }
 
+variable "db_username" {
+  description = "The username for the database"
+  type        = string
+  sensitive   = true
+}
+
+variable "db_password" {
+  description = "The password for the database"
+  type        = string
+  sensitive   = true
+}
+
 variable "rds_security_group_name" {
   description = "Nome do Security Group do RDS"
   type        = string
@@ -82,3 +94,5 @@ variable "rds_instance_name"{
   type        = string
   default     = "rds-dev-ezfastfood"
 }
+
+
