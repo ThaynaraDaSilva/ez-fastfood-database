@@ -21,7 +21,7 @@ jobs:
       - name: checkout repository
         uses: actions/checkout@v2
       
-      - name: setup Terraform
+      - name: setup terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.5.0

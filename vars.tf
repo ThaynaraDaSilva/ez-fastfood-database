@@ -60,17 +60,6 @@ variable "instance_class" {
   default     = "db.t4g.micro"
 }
 
-variable "db_username" {
-  description = "Usuário do banco de dados"
-  type        = string
-}
-
-variable "db_password" {
-  description = "Senha do banco de dados"
-  type        = string
-  sensitive   = true
-}
-
 variable "parameter_group_name" {
   description = "Nome do grupo de parâmetros do banco de dados"
   type        = string
