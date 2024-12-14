@@ -23,6 +23,7 @@ variable "rds_security_group_name" {
 variable "environment" {
   description = "Ambiente (e.g., dev, staging, prod)"
   type        = string
+  default     = "dev"
 }
 
 variable "project" {
