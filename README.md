@@ -87,13 +87,6 @@ O banco de dados foi modelado com base nos requisitos do negócio, priorizando o
 
 ---
 
-## Arquitetura na Nuvem
-A infraestrutura foi projetada para garantir alta segurança, escalabilidade e disponibilidade. O diagrama abaixo ilustra como os componentes da AWS interagem para suportar o banco de dados gerenciado.
-
-![Diagrama de Arquitetura AWS](./diagrams/aws-architecture.png)
-
----
-
 ## Passos para Configuração e Deploy
 
 1. Clone o repositório e navegue até o diretório raiz:
@@ -122,8 +115,6 @@ A infraestrutura foi projetada para garantir alta segurança, escalabilidade e d
 3. Garantir monitoramento contínuo utilizando Amazon CloudWatch.
 
 Essa abordagem modular e gerenciada garante uma infraestrutura robusta, segura e escalável para suportar o crescimento do projeto.
-
-
 
 C:\Users\Thaynara\.aws\credentials
 
