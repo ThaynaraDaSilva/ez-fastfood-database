@@ -143,3 +143,10 @@ terraform -v
 aws configure
 aws sts get-caller-identity
 ```
+
+
+├── main.tf        # Declaração principal dos recursos
+├── variables.tf   # Declaração de variáveis para customização
+├── outputs.tf     # Outputs úteis, como endpoint do banco de dados
+├── provider.tf    # Configuração do provedor (AWS, GCP, etc.)
+├── terraform.tfvars # Valores das variáveis para diferentes ambientes
