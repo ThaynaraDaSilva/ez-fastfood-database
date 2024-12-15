@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - chore/refactor-db-terraform
 
 env:
   TF_VAR_aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
