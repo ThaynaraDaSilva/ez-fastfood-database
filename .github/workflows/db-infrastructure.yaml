@@ -2,6 +2,8 @@ name: DB Infrastructure
 
 on:
   pull_request:
+    types:
+      - closed
     branches:
       - main
       - develop
@@ -14,6 +16,7 @@ env:
 
 jobs:
   Validate:
+    if: github.event.pull_request.merged == true
     name: Validate terraform
     runs-on: ubuntu-latest
 
