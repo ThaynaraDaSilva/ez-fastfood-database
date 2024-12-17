@@ -21,52 +21,13 @@ Ao adotar o Amazon RDS, a equipe evita tarefas complexas de gerenciamento, como 
 **Considerações Futuras**
 Caso a lanchonete venha a expandir, o Amazon RDS PostgreSQL continuará sendo uma solução robusta e escalável. Ele poderá suportar tanto o crescimento do volume de dados quanto o aumento das transações simultâneas, mantendo a integridade e desempenho do sistema sem necessidade de migrações ou mudanças significativas na arquitetura.
 
-## Infraestrutura na Nuvem com Terraform
+## Pré-requisitos (execução via pipeline)
+1. Terraform
+2. Credenciais AWS: Configure as credenciais AWS para permitir o provisionamento de recursos.
+No pipeline configurado no GitHub Actions, as credenciais foram armazenadas como secret variables para evitar exposição direta no código:
 
-Para garantir alta disponibilidade e escalabilidade, utilizamos o Amazon RDS para PostgreSQL, configurado via Terraform, juntamente com uma VPC para isolamento e segurança da rede.
-
-### Benefícios do Amazon RDS para PostgreSQL
-
-- **Gerenciamento Simplificado:**
-  - Backups automáticos, atualizações de versão e manutenção gerenciada pela AWS.
-
-- **Alta Disponibilidade e Redundância:**
-  - Configuração Multi-AZ para maior resiliência.
-
-- **Segurança:**
-  - Criptografia de dados em repouso e em trânsito, além de políticas de acesso configuráveis.
-
-- **Monitoramento e Escalabilidade:**
-  - Métricas detalhadas via Amazon CloudWatch e escalabilidade ajustável conforme a demanda.
-
----
-
-## Organização do Repositório Terraform
-
-O repositório está organizado com os seguintes diretórios principais:
-
-```
-/aws-vpc
-  - Configuração da Virtual Private Cloud (VPC), subnets, security groups e rotas.
-
-/aws-rds
-  - Configuração do Amazon RDS para PostgreSQL, incluindo parâmetros de inicialização e integração com a VPC.
-```
-
-### Configuração da VPC (`aws-vpc`)
-- **Objetivo:** Garantir isolamento da rede e controle de tráfego.
-- Inclui:
-  - Subnets públicas e privadas.
-  - Tabelas de rotas e gateways de internet.
-  - Security groups para controle de acesso ao banco de dados.
-
-### Configuração do RDS (`aws-rds`)
-- **Objetivo:** Criar o banco de dados PostgreSQL gerenciado.
-- Inclui:
-  - Configuração de instâncias, parâmetros de performance e backups automáticos.
-  - Associação com as subnets privadas da VPC.
-
----
+- **AWS_ACCESS_KEY_ID**
+- **AWS_SECRET_ACCESS_KEY**
 
 ## Modelagem de Dados
 O banco de dados foi modelado com base nos requisitos do negócio, priorizando o uso de relacionamentos fortes entre tabelas. O diagrama abaixo representa o modelo de dados, incluindo entidades como **Pedidos**, **Pagamentos** e **Clientes**.
@@ -75,59 +36,13 @@ O banco de dados foi modelado com base nos requisitos do negócio, priorizando o
 
 ---
 
-## Passos para Configuração e Deploy
-
-1. Clone o repositório e navegue até o diretório raiz:
-   ```bash
-   git clone <url-repositorio>
-   cd terraform
-   ```
-
-2. Configure suas credenciais da AWS.
-
-3. Inicialize o Terraform e aplique a infraestrutura:
-   ```bash
-   terraform init
-   terraform plan
-   terraform apply
-   ```
-
-4. Verifique se os recursos foram criados corretamente no console da AWS.
-
----
-
-## Próximos Passos
-
-1. Testar a conexão com o banco de dados utilizando a VPC configurada.
-2. Implementar consultas otimizadas para o modelo de dados atual.
-3. Garantir monitoramento contínuo utilizando Amazon CloudWatch.
-
-Essa abordagem modular e gerenciada garante uma infraestrutura robusta, segura e escalável para suportar o crescimento do projeto.
-
-C:\Users\Thaynara\.aws\credentials
-
-1. Configurar terraform
-2. Configurar AWS CLI
-3. Instalar extensão no visual studio code
-   1. Terraform
-   2. AWS ToolKit
-4. Condigurar Terraform Workspace no  VS CODE
-
-# Comandos Terraform
-```
-
-terraform init      # Initializes the working directory and downloads the required providers
-terraform plan      # Shows what will be created or modified
-terraform plan -out=plan.out # Generate and save plan
-terraform apply     # Applies the changes to your AWS account
-
-terraform apply plan.out # Apply Saved plan
+## Links dos demais repositórios deste projeto:
+- Network: https://github.com/ThaynaraDaSilva/ez-fastfood-network
+- APIs: https://github.com/ThaynaraDaSilva/ez-fastfood-api
+- EKS:https://github.com/ThaynaraDaSilva/ez-fastfood-eks
+- Lambda: https://github.com/ThaynaraDaSilva/ez-fastfood-authentication
 
 
-```
-
-```
-terraform -v
-aws configure
-aws sts get-caller-identity
-```
+## Desenvolvido por:
+@tchfer : RM357414
+@ThaynaraDaSilva : RM357418
