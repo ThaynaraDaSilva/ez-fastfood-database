@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - chore/pipeline-and-terraform
 
 env:
   TF_VAR_aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}

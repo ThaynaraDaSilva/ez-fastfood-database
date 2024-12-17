@@ -82,7 +82,7 @@ variable "skip_final_snapshot" {
 variable "rds_instance_name"{
   description = "Nome da instancia do banco de dados"
   type        = string
-  default     = "rds-dev-ezfastfood"
+  default     = "ez-fastfood-rds"
 }
 variable "aws_region" {
   description = "Região AWS para os recursos"
