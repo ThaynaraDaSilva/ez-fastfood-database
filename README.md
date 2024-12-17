@@ -35,7 +35,7 @@ No pipeline configurado no GitHub Actions, as credenciais foram armazenadas como
 ## Modelagem de Dados
 O banco de dados foi modelado com base nos requisitos do negócio, priorizando o uso de relacionamentos fortes entre tabelas. O diagrama abaixo representa o modelo de dados, incluindo entidades como **Pedidos**, **Pagamentos** e **Clientes**.
 
-![database-model](https://github.com/user-attachments/assets/5423fa1c-da17-4b60-a160-7ed25845d25d)
+![database-ez-fastfood](https://github.com/user-attachments/assets/f549b099-bd4e-430d-89a0-cb128dfa8e6c)
 
 ---
 
