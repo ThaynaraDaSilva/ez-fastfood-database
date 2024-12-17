@@ -6,6 +6,7 @@ on:
       - closed
     branches:
       - main
+      - develop
 
 env:
   TF_VAR_aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
