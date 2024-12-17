@@ -4,7 +4,7 @@
 data "aws_vpc" "selected" {
   filter {
     name   = "tag:Name"       # Nome da tag usada para identificar a VPC
-    values = [var.vpc_name]   # Nome da VPC especificado como variável
+    values = ["${var.vpc_name}-${var.environment}"]   # Nome da VPC especificado como variável
   }
 }
 
@@ -25,7 +25,8 @@ data "aws_subnets" "private_subnets" {
 data "aws_security_group" "rds_sg" {
   filter {
     name   = "tag:Name"       # Nome da tag usada para identificar o SG
-    values = [var.rds_security_group_name]
+    values = ["${var.rds_security_group_name}-${var.environment}"]
+    
   }
 }
 
