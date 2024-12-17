@@ -2,7 +2,7 @@
 
 ## Escolha do Banco de Dados: RDS PostgreSQL
 
-A solução ez-fastfood-api, desenvolvida para uma lanchonete, foi inicialmente estruturada utilizando o banco de dados PostgreSQL devido à sua robustez, ampla adoção no mercado e suporte nativo para modelagem relacional de dados. A escolha de um banco relacional foi motivada pela necessidade de estabelecer relações entre entidades fundamentais da API, como pedidos, clientes e pagamentos, garantindo integridade, consistência e eficiência no gerenciamento dos dados.
+A solução **ez-fastfood-api**, desenvolvida para uma lanchonete, foi inicialmente estruturada utilizando o banco de dados PostgreSQL devido à sua robustez, ampla adoção no mercado e suporte nativo para modelagem relacional de dados. A escolha de um banco relacional foi motivada pela necessidade de estabelecer relações entre entidades fundamentais da API, como pedidos, clientes e pagamentos, garantindo integridade, consistência e eficiência no gerenciamento dos dados.
 
 Com a evolução do projeto e a necessidade de migração para um ambiente em nuvem, o Amazon RDS (Relational Database Service) com PostgreSQL foi a opção mais adequada por diversas razões:
 
