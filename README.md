@@ -1,37 +1,25 @@
-# Infraestrutura de Banco de Dados Gerenciável com Terraform
+# Infraestrutura de Banco de Dados
 
-## Escolha do Banco de Dados: PostgreSQL
+## Escolha do Banco de Dados: RDS PostgreSQL
 
-### Introdução
-Na fase inicial do projeto, escolhemos o PostgreSQL devido à sua popularidade e forte adoção pela comunidade. Após estudar a disciplina de Engenharia de Dados, aprofundamos nossa análise e confirmamos que ele continua sendo a melhor solução para nossas necessidades, especialmente devido à sua capacidade de lidar com relacionamentos complexos entre as tabelas.
+A solução ez-fastfood-api, desenvolvida para uma lanchonete, foi inicialmente estruturada utilizando o banco de dados PostgreSQL devido à sua robustez, ampla adoção no mercado e suporte nativo para modelagem relacional de dados. A escolha de um banco relacional foi motivada pela necessidade de estabelecer relações entre entidades fundamentais da API, como pedidos, clientes e pagamentos, garantindo integridade, consistência e eficiência no gerenciamento dos dados.
 
----
+Com a evolução do projeto e a necessidade de migração para um ambiente em nuvem, o Amazon RDS (Relational Database Service) com PostgreSQL foi a opção mais adequada por diversas razões:
 
-## Vantagens Técnicas do PostgreSQL
+1. **Facilidade de Migração**:
+Por já utilizarmos o PostgreSQL no ambiente local, o Amazon RDS PostgreSQL permitiu uma transição transparente e eficiente para a nuvem. Não houve necessidade de refatoração da aplicação ou reestruturação do banco de dados, preservando a lógica relacional já estabelecida e minimizando o tempo e o esforço envolvidos no processo de migração.
 
-1. **Modelagem de Dados e Schemas:**
-   - Suporte robusto a schemas, proporcionando organização clara e flexibilidade na estrutura de dados.
+2. **Escalabilidade Vertical e Horizontal**:
+O Amazon RDS PostgreSQL oferece escalabilidade vertical e horizontal, permitindo o ajuste de recursos computacionais, como CPU, memória e armazenamento, de forma prática e sob demanda. Isso garante que a API possa lidar com o aumento de requisições sem impacto significativo no desempenho. Se a lanchonete expandir futuramente, o RDS PostgreSQL proporcionará um crescimento sustentável, suportando um maior volume de dados e transações simultâneas.
 
-2. **Forte Relacionamento entre Tabelas:**
-   - Ideal para modelagem de dados com relacionamentos complexos (por exemplo, Pedidos, Pagamento e Clinte).
+3. **Desempenho e Confiabilidade**:
+O Amazon RDS PostgreSQL é uma solução gerenciada que oferece alta disponibilidade e redundância automática, garantindo que o banco de dados permaneça acessível mesmo em cenários de falhas ou interrupções. Recursos como réplicas de leitura e backups automatizados contribuem para um desempenho otimizado e uma operação segura, essenciais para APIs que exigem resposta rápida e alta confiabilidade.
 
-3. **Integridade Transacional:**
-   - Garantia de consistência e confiabilidade nas transações, fundamental para operações financeiras e logísticas.
+4. **Gestão simplificada**:
+Ao adotar o Amazon RDS, a equipe evita tarefas complexas de gerenciamento, como configuração, aplicação de patches, backups e monitoramento. Com o serviço gerenciado da AWS, o foco pode permanecer no desenvolvimento e na otimização da API, permitindo maior agilidade na entrega de melhorias e novas funcionalidades.
 
-4. **Flexibilidade de Consultas:**
-   - SQL avançado, suporte a junções e consultas analíticas complexas.
-
-5. **Comunidade Ativa:**
-   - Documentação extensa, suporte técnico e uma ampla variedade de ferramentas compatíveis.
-
----
-
-## Justificativa para Não Usar um Banco Não Relacional
-
-1. **Foco em Relacionamentos:**
-   - A estrutura do negócio exige fortes relacionamentos entre entidades, o que seria menos eficiente em um banco não relacional.
-
----
+**Considerações Futuras**
+Caso a lanchonete venha a expandir, o Amazon RDS PostgreSQL continuará sendo uma solução robusta e escalável. Ele poderá suportar tanto o crescimento do volume de dados quanto o aumento das transações simultâneas, mantendo a integridade e desempenho do sistema sem necessidade de migrações ou mudanças significativas na arquitetura.
 
 ## Infraestrutura na Nuvem com Terraform
 
