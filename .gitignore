@@ -40,6 +40,5 @@ build/
 *.tfstate.*
 *.backup
 *.log
-*.tfvars
 crash.log
 
