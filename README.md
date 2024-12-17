@@ -28,6 +28,9 @@ No pipeline configurado no GitHub Actions, as credenciais foram armazenadas como
 
 - **AWS_ACCESS_KEY_ID**
 - **AWS_SECRET_ACCESS_KEY**
+3. **Execução manual do arquivo database.sql**, disponível no repositório: https://github.com/ThaynaraDaSilva/ez-fastfood-api.
+- Será necessário incluir temporariamente o seu IP em **inbound rules do security group** para que consiga acessar o banco de dados e executar o .sql.
+- A execução do database.sql deve ocorrer uma única vez.
 
 ## Modelagem de Dados
 O banco de dados foi modelado com base nos requisitos do negócio, priorizando o uso de relacionamentos fortes entre tabelas. O diagrama abaixo representa o modelo de dados, incluindo entidades como **Pedidos**, **Pagamentos** e **Clientes**.

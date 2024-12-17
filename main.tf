@@ -26,6 +26,7 @@ data "aws_security_group" "rds_sg" {
   filter {
     name   = "tag:Name"       # Nome da tag usada para identificar o SG
     values = ["${var.rds_security_group_name}-${var.environment}"]
+    
   }
 }
 
