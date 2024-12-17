@@ -1,7 +1,7 @@
 aws_region             = "us-east-1"
 vpc_name               = "ez-fastfood-vpc"   
-rds_instance_name      = "ez-fastfood-rs"                
-rds_security_group_name = "ez-fastfood-rs-sg"  
+rds_instance_name      = "ez-fastfood-rds"                
+rds_security_group_name = "ez-fastfood-rds-sg"  
 environment            = "dev"                               
 project                = "ez-fastfood"                       
 allocated_storage      = 20                                  
