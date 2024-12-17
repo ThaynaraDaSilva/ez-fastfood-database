@@ -22,8 +22,8 @@ Ao adotar o Amazon RDS, a equipe evita tarefas complexas de gerenciamento, como 
 Caso a lanchonete venha a expandir, o Amazon RDS PostgreSQL continuará sendo uma solução robusta e escalável. Ele poderá suportar tanto o crescimento do volume de dados quanto o aumento das transações simultâneas, mantendo a integridade e desempenho do sistema sem necessidade de migrações ou mudanças significativas na arquitetura.
 
 ## Pré-requisitos (execução via pipeline)
-1. Terraform
-2. Credenciais AWS: Configure as credenciais AWS para permitir o provisionamento de recursos.
+1. **Terraform**
+2. **Credenciais AWS**: Configure as credenciais AWS para permitir o provisionamento de recursos.
 No pipeline configurado no GitHub Actions, as credenciais foram armazenadas como secret variables para evitar exposição direta no código:
 
 - **AWS_ACCESS_KEY_ID**
