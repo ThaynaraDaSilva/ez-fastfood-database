@@ -1,6 +1,6 @@
-# Infraestrutura de Banco de Dados
+# ez-fastfood-database
 
-## Escolha do Banco de Dados: RDS PostgreSQL
+## Escolha do anco de Dados: RDS PostgreSQL
 
 A solução ez-fastfood-api, desenvolvida para uma lanchonete, foi inicialmente estruturada utilizando o banco de dados PostgreSQL devido à sua robustez, ampla adoção no mercado e suporte nativo para modelagem relacional de dados. A escolha de um banco relacional foi motivada pela necessidade de estabelecer relações entre entidades fundamentais da API, como pedidos, clientes e pagamentos, garantindo integridade, consistência e eficiência no gerenciamento dos dados.
 
@@ -44,5 +44,5 @@ O banco de dados foi modelado com base nos requisitos do negócio, priorizando o
 
 
 ## Desenvolvido por:
-@tchfer : RM357414
-@ThaynaraDaSilva : RM357418
+@tchfer : RM357414<br>
+@ThaynaraDaSilva : RM357418<br>
