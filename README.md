@@ -44,7 +44,7 @@ O banco de dados foi modelado com base nos requisitos do negócio, priorizando o
 - APIs: https://github.com/ThaynaraDaSilva/ez-fastfood-api
 - EKS:https://github.com/ThaynaraDaSilva/ez-fastfood-eks
 - Lambda: https://github.com/ThaynaraDaSilva/ez-fastfood-authentication
-
+- Apresentação da arquitetura: https://www.youtube.com/watch?v=MhPpoUZhlFs
 
 ## Desenvolvido por:
 @tchfer : RM357414<br>
